@@ -19,7 +19,11 @@ export default function Home(): JSX.Element {
   } = useInfiniteQuery(
     'images',
     async ({ pageParam = 0 }) => {
-      const response = await api.get(`/api/images?after=${pageParam}`);
+      const response = await api.get(`/api/images`, {
+        params: {
+          after: pageParam,
+        },
+      });
       return response.data;
     },
     {
